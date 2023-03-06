@@ -1,0 +1,11 @@
+<div class="app">
+  <app-bar class="bar"></app-bar>
+  <div class="show-container">    
+    <app-header class="header-show" [itinerario]="itinerario"></app-header>
+    <app-tasks class="tasks" [taskBDate]="taskBDate"
+      [taskSDate]="taskSDate">
+    </app-tasks>
+    <app-add-task id="add-container" class="add-container disabled"
+      [taskBDate]="taskBDate" [taskSDate]="taskSDate"></app-add-task>
+  </div>
+</div>

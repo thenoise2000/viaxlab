@@ -1,0 +1,70 @@
+<div class="tasks">
+  <div class="task-box" *ngIf="taskSDate.length">
+    <p class="title">
+      <img src="../../../assets/images/fecha-icon.svg" alt="">
+      Sin fecha asignada <span>({{taskSDate.length}})</span>
+    </p>
+    <div class="task" *ngFor="let activity of taskSDate" cdkDrag>
+      <div class="task-image">
+        <img [src]="'../../../assets/images/'+ activity.type +'.png'" alt="">
+        <div class="info-task">
+          <p class="name">{{activity.title}}</p>
+          <form [formGroup]="form">
+            <input type="datetime-local" formControlName="DateStar" *ngIf="isEditing(activity.taskId)">
+            <input type="datetime-local" formControlName="DateEnd" *ngIf="isEditing(activity.taskId)">
+          </form>
+        </div>
+      </div>
+      <div class="edit">
+        <button *ngIf="!isEditing(activity.taskId)" (click)="handleTaskEdit(activity.taskId)">
+          <img src="../../../assets/images/edit-icon.svg" alt="">
+        </button>
+        <button *ngIf="isEditing(activity.taskId)" (click)="handleTaskUpdateE(activity.taskId)">
+          <img src="../../../assets/images/edit-icon.svg" alt="">
+        </button>
+        <button *ngIf="!isEditing(activity.activityId)" (click)="handleTaskDelete(activity.activityId)">
+          X
+        </button>
+        <button *ngIf="isEditing(activity.taskId)" (click)="cancelEdit()">
+          X
+        </button>
+      </div>
+    </div>    
+  </div>
+  <ng-container *ngFor="let date of getDates(taskBDate)">
+    <div *ngIf="taskBDate[date].length" class="task-box">
+      <p class="title">
+        {{date | date:'dd-MM-yyyy'}} <span>({{taskBDate[date].length}})</span>
+      </p>
+      <div class="task" *ngFor="let activity of taskBDate[date]" cdkDrag>
+        <div class="task-image">
+          <img [src]="'../../../assets/images/TASK.png'" alt="">
+          <div class="info-task">
+            <p class="name">{{activity.title}}</p>
+            <p class="date" *ngIf="!isEditing(activity.taskId)">{{getHour(activity.BDate)}} -
+              {{getHour(activity.EDate)}}</p>
+            <form [formGroup]="form">
+              <input type="datetime-local" formControlName="DateStar" *ngIf="isEditing(activity.taskId)">
+              <input type="datetime-local" formControlName="DateEnd" *ngIf="isEditing(activity.taskId)">
+            </form>
+            <p class="status" *ngIf="activity.status === 'STATUS'">In Process</p>
+          </div>
+        </div>
+        <div class="edit">
+          <button *ngIf="!isEditing(activity.taskId)" (click)="handleTaskEdit(activity.taskId)">
+            <img src="../../../assets/images/edit-icon.svg" alt="">
+          </button>
+          <button *ngIf="isEditing(activity.taskId)" (click)="handleTaskUpdate(activity.taskId)">
+            <img src="../../../assets/images/edit-icon.svg" alt="">
+          </button>
+          <button *ngIf="!isEditing(activity.activityId)" (click)="handleTaskDelete(activity.activityId)">
+            X
+          </button>
+          <button *ngIf="isEditing(activity.taskId)" (click)="cancelEdit()">
+            X
+          </button>
+        </div>
+      </div>      
+    </div>
+  </ng-container>
+</div>

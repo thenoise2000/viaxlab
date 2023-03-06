@@ -1,0 +1,30 @@
+<div class="add-container">
+  <div class="header">
+    <p><span>></span> Nueva Tarea</p>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+    <div class="inputs">
+      <div class="top-label w-100">
+        <label for="name">Descripcion de la tarea</label>
+        <input type="text" name="name" formControlName="name" placeholder="Busca una actividad o crea una nueva...">
+      </div>
+      <div class="top-label">
+        <label for="start">Fecha inicial</label>
+        <input type="datetime-local" name="start" formControlName="start">
+      </div>
+      <div class="top-label">
+        <label for="end">Fecha final</label>
+        <input type="datetime-local" name="end" formControlName="end">
+      </div>
+    </div>
+    <div class="btns">      
+      <p *ngIf="error !== ''" class="error-text">Error: {{error}}</p>
+      <button (click)="handleCloseTask()">
+        Cancelar
+      </button>
+      <button type="submit">
+        Agregar
+      </button>
+    </div>
+  </form>
+</div>
